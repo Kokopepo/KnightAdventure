@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public static Player Instance { get; private set; }
 
     public event EventHandler OnPlayerDeath;
+    public event EventHandler OnFlashBlink;
 
     [SerializeField] private float _movingSpeed = 5f;
     [SerializeField] private int _maxHealth = 10;
@@ -26,6 +27,7 @@ public class Player : MonoBehaviour
 
     private bool _canTakeDamage;
     private bool _isAlive;
+
 
     private void Awake()
     {
@@ -68,6 +70,8 @@ public class Player : MonoBehaviour
             _knockBack.GetKnockedBack(damageSource);
 
             StartCoroutine(DamageRecoveryRoutine());
+
+            OnFlashBlink?.Invoke(this, EventArgs.Empty);
         }  
 
         DeteckDeath();   

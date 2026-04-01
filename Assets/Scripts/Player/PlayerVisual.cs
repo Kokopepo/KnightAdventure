@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class PlayerVisual : MonoBehaviour
 {
-    private Animator animator;
-    private SpriteRenderer spriteRenderer;
+    private Animator _animator;
+    private SpriteRenderer _spriteRenderer;
+    private FlashBlink _flashBlink;
 
     private const string IS_RUNNING = "IsRunning";
     private const string IS_DIE = "IsDie";
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _flashBlink = GetComponent<FlashBlink>();
+
     }
 
     private void Start()
@@ -23,12 +26,13 @@ public class PlayerVisual : MonoBehaviour
 
     private void Player_OnPlayerDeath(object sender, System.EventArgs e)
     {
-        animator.SetBool(IS_DIE, true);
+        _animator.SetBool(IS_DIE, true);
+        _flashBlink.StopBlinking();
     }
 
     private void Update()
     {
-        animator.SetBool(IS_RUNNING, Player.Instance.IsRunning());
+        _animator.SetBool(IS_RUNNING, Player.Instance.IsRunning());
 
         if (Player.Instance.IsAlive())
             AdjustPlayerFacingDirection();
@@ -41,12 +45,12 @@ public class PlayerVisual : MonoBehaviour
 
         if (mousePos.x < playerPosition.x)
         {
-            spriteRenderer.flipX = true;
+            _spriteRenderer.flipX = true;
             //*ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
         else
         {
-            spriteRenderer.flipX = false;
+            _spriteRenderer.flipX = false;
             //*ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, 0);
             
         }

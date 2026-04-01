@@ -1443,6 +1443,7 @@ GameObject:
   - component: {fileID: 1236735640}
   - component: {fileID: 1236735639}
   - component: {fileID: 1236735641}
+  - component: {fileID: 1236735642}
   m_Layer: 0
   m_Name: PlayerVisual
   m_TagString: Untagged
@@ -1550,6 +1551,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e974ae0363c7d3343835c29befd3bc62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1236735642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236735637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 345d1a262cb477646b8882dbd8d7ab1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageableObject: {fileID: 293584966}
+  _blinkMaterial: {fileID: 2100000, guid: 5b8d0a26686f9b448a5a0ac1080c3b41, type: 2}
+  _blinkDuration: 0.2
 --- !u!1001 &1335030514
 PrefabInstance:
   m_ObjectHideFlags: 0
