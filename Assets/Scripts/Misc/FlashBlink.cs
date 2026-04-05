@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class FlashBlink : MonoBehaviour
 {
-    [SerializeField] private MonoBehaviour _damageableObject; 
-    [SerializeField] private Material _blinkMaterial;
-    [SerializeField] private float _blinkDuration = 0.2f;
+    [SerializeField] private MonoBehaviour damageableObject; 
+    [SerializeField] private Material blinkMaterial;
+    [SerializeField] private float blinkDuration = 0.2f;
 
     private float _blinkTimer;
     private Material _defaultMaterial;
@@ -22,9 +22,9 @@ public class FlashBlink : MonoBehaviour
 
     private void Start()
     {
-        if (_damageableObject is Player)
+        if (damageableObject is Player)
         {
-            (_damageableObject as Player).OnFlashBlink += DamagableObject_OnFlashBlink;
+            (damageableObject as Player).OnFlashBlink += DamagableObject_OnFlashBlink;
         }
     }
 
@@ -55,8 +55,8 @@ public class FlashBlink : MonoBehaviour
 
     private void SetBlinkMaterial()
     {
-        _blinkTimer = _blinkDuration;
-        _spriteRenderer.material = _blinkMaterial;
+        _blinkTimer = blinkDuration;
+        _spriteRenderer.material = blinkMaterial;
     }
 
     private void DamagableObject_OnFlashBlink(object sender, System.EventArgs e)
@@ -66,9 +66,9 @@ public class FlashBlink : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (_damageableObject is Player)
+        if (damageableObject is Player)
         {
-            (_damageableObject as Player).OnFlashBlink -= DamagableObject_OnFlashBlink;
+            (damageableObject as Player).OnFlashBlink -= DamagableObject_OnFlashBlink;
         }
     }
 }

@@ -7,11 +7,11 @@ using System;
 
 public class EnemyAI : MonoBehaviour
 {
-    [SerializeField] private State _startingState; //выбираем состояние моба
-    [SerializeField] private float _roamingDistanceMin = 3f; //минимальное расстояние которое объект может пройти
+    [SerializeField] private State startingState; //выбираем состояние моба
+    [SerializeField] private float roamingDistanceMin = 3f; //минимальное расстояние которое объект может пройти
     
-    [SerializeField] private float _roamingDistanceMax = 7f; //максимальное расстояние которое объект может пройти
-    [SerializeField] private float _roamingTimerMax = 2f; //время в течении которого он будет двигаться (если в течении этого времени
+    [SerializeField] private float roamingDistanceMax = 7f; //максимальное расстояние которое объект может пройти
+    [SerializeField] private float roamingTimerMax = 2f; //время в течении которого он будет двигаться (если в течении этого времени
     //он не дошел до нужной точки, то он выбирает себе новую точку) 2 секунды короче говоря
 
     private NavMeshAgent _navMeshAgent; //непосредственно тот объект с которым мы будем работать
@@ -23,9 +23,9 @@ public class EnemyAI : MonoBehaviour
     //? Атака игрока начало
     public event EventHandler OnEnemyAttack;
 
-    [SerializeField] private bool _isAttackingEnemy = false; 
-    [SerializeField] private float _attackingDistance = 2f; 
-    [SerializeField] private float _attackRate = 2f;
+    [SerializeField] private bool isAttackingEnemy = false; 
+    [SerializeField] private float attackingDistance = 2f; 
+    [SerializeField] private float attackRate = 2f;
     private float _nextAttackTime = 0f;
 
     //? Атака игрока конец
@@ -33,10 +33,10 @@ public class EnemyAI : MonoBehaviour
 
 
     //? Преследование игрока начало
-    [SerializeField] private bool _isChasingEnemy = false; //преследует ли игрока агент
-    [SerializeField] private float _chasingDistance = 4f; //расстояние обнаружения игрока агентом
+    [SerializeField] private bool isChasingEnemy = false; //преследует ли игрока агент
+    [SerializeField] private float chasingDistance = 4f; //расстояние обнаружения игрока агентом
 
-    [SerializeField] private float _chasingSpeedMultiplier = 2f; // ускорение при преследовании игрока
+    [SerializeField] private float chasingSpeedMultiplier = 2f; // ускорение при преследовании игрока
 
     private float _roamingSpeed;
     private float _chasingSpeed;
@@ -89,10 +89,10 @@ public class EnemyAI : MonoBehaviour
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _navMeshAgent.updateRotation = false; //измение вращения отключаем
         _navMeshAgent.updateUpAxis = false; //измение ориентации тоже отключаем 
-        _currentState = _startingState;
+        _currentState = startingState;
 
         _roamingSpeed = _navMeshAgent.speed;
-        _chasingSpeed = _navMeshAgent.speed * _chasingSpeedMultiplier;
+        _chasingSpeed = _navMeshAgent.speed * chasingSpeedMultiplier;
     }
 
 
@@ -123,7 +123,7 @@ public class EnemyAI : MonoBehaviour
                 if (_roamingTimer < 0)
                 {
                     Roaming();
-                    _roamingTimer = _roamingTimerMax;                   
+                    _roamingTimer = roamingTimerMax;                   
                 }
                 CheckCurrentState();
                 break;
@@ -150,7 +150,7 @@ public class EnemyAI : MonoBehaviour
         {
             OnEnemyAttack?.Invoke(this, EventArgs.Empty);
 
-            _nextAttackTime = Time.time + _attackRate; 
+            _nextAttackTime = Time.time + attackRate; 
         }
         
     }
@@ -162,19 +162,19 @@ public class EnemyAI : MonoBehaviour
         
         State newState = State.Roaming;    
 
-        if (_isChasingEnemy)
+        if (isChasingEnemy)
         {
-            if (distanceToPlayer <= _chasingDistance)
+            if (distanceToPlayer <= chasingDistance)
             {
-                _isChasingEnemy = true;
+                isChasingEnemy = true;
                 newState = State.Chasing;
             }
             
         }
 
-        if (_isAttackingEnemy)
+        if (isAttackingEnemy)
         {
-            if (distanceToPlayer <= _attackingDistance)
+            if (distanceToPlayer <= attackingDistance)
             {
                 newState = State.Attacking;
                 // if (Player.Instance.IsAlive())
@@ -190,8 +190,8 @@ public class EnemyAI : MonoBehaviour
 
         if (Player.Instance.IsAlive() == false)
         {
-            _isAttackingEnemy = false;
-            _isChasingEnemy = false;
+            isAttackingEnemy = false;
+            isChasingEnemy = false;
             newState = State.Roaming;
         }
 
@@ -260,7 +260,7 @@ public class EnemyAI : MonoBehaviour
 
     private Vector3 GetRoamingPosition() //получаем новое направление для движения
     {
-        return _startingPosition + Utils.GetRandomDir() * Utils.GetRandomDistance(_roamingDistanceMin, _roamingDistanceMax); //у юнити свой рандом (UnityEngine.Random.Range)
+        return _startingPosition + Utils.GetRandomDir() * Utils.GetRandomDistance(roamingDistanceMin, roamingDistanceMax); //у юнити свой рандом (UnityEngine.Random.Range)
     }
 
     private void ChangeFacingDirection(Vector3 sourcePosition, Vector3 targetPosition) //source - позиция моба, target - куда он пойдет 

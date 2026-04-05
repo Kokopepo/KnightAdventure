@@ -1563,9 +1563,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 345d1a262cb477646b8882dbd8d7ab1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageableObject: {fileID: 293584966}
-  _blinkMaterial: {fileID: 2100000, guid: 5b8d0a26686f9b448a5a0ac1080c3b41, type: 2}
-  _blinkDuration: 0.2
+  damageableObject: {fileID: 0}
+  blinkMaterial: {fileID: 0}
+  blinkDuration: 0.2
 --- !u!1001 &1335030514
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1866,6 +1866,7 @@ GameObject:
   - component: {fileID: 1475083940}
   - component: {fileID: 1475083939}
   - component: {fileID: 1475083938}
+  - component: {fileID: 1475083941}
   m_Layer: 0
   m_Name: NavMeshSurface
   m_TagString: Untagged
@@ -1935,6 +1936,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1475083941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475083937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a4ff84031aa98c49a3c3d7e4d6ee48d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1485997624
 PrefabInstance:
   m_ObjectHideFlags: 0
