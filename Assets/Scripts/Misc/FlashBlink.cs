@@ -17,17 +17,15 @@ public class FlashBlink : MonoBehaviour
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _defaultMaterial = _spriteRenderer.material;
-        _isBlinking = true;
-
-        if (_damageableObject is Player)
-        {
-            (_damageableObject as Player).OnFlashBlink += DamagableObject_OnFlashBlink;
-        }
+        _isBlinking = true;      
     }
 
     private void Start()
     {
-        
+        if (_damageableObject is Player)
+        {
+            (_damageableObject as Player).OnFlashBlink += DamagableObject_OnFlashBlink;
+        }
     }
 
     // Update is called once per frame
@@ -64,5 +62,13 @@ public class FlashBlink : MonoBehaviour
     private void DamagableObject_OnFlashBlink(object sender, System.EventArgs e)
     {
         SetBlinkMaterial();
+    }
+
+    private void OnDestroy()
+    {
+        if (_damageableObject is Player)
+        {
+            (_damageableObject as Player).OnFlashBlink -= DamagableObject_OnFlashBlink;
+        }
     }
 }

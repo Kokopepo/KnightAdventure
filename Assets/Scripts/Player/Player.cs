@@ -129,4 +129,9 @@ public class Player : MonoBehaviour
     {
         ActiveWeapon.Instance.GetActiveWeapon().Attack();
     }
+
+    private void OnDestroy()
+    {
+        GameInput.Instance.OnPlayerAttack -= Player_OnPlayerAttack;
+    }
 }
