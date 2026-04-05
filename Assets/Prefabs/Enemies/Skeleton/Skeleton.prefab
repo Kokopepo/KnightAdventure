@@ -120,9 +120,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d4fbfe7ec46c641848567008f99379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyAI: {fileID: 6384178629621783501}
-  _enemyEntity: {fileID: 2978059110584622463}
-  _enemyShadow: {fileID: 8820181923618433337}
+  enemyAI: {fileID: 6384178629621783501}
+  enemyEntity: {fileID: 2978059110584622463}
+  enemyShadow: {fileID: 8820181923618433337}
 --- !u!1 &6420535318095935611
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,16 +327,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1057fe1600311734eb9b86c62a9dc275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startingState: 1
-  _roamingDistanceMin: 3
-  _roamingDistanceMax: 7
-  _roamingTimerMax: 10
-  _isAttackingEnemy: 0
-  _attackingDistance: 2
-  _attackRate: 2
-  _isChasingEnemy: 1
-  _chasingDistance: 4
-  _chasingSpeedMultiplier: 2
+  startingState: 1
+  roamingDistanceMin: 3
+  roamingDistanceMax: 7
+  roamingTimerMax: 2
+  isAttackingEnemy: 1
+  attackingDistance: 2
+  attackRate: 2
+  isChasingEnemy: 1
+  chasingDistance: 4
+  chasingSpeedMultiplier: 2
 --- !u!114 &2978059110584622463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,7 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7210a39093af0034eb0b148ac207283b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemySO: {fileID: 11400000, guid: c832f590cde49aa42971516e03175fc6, type: 2}
+  enemySO: {fileID: 11400000, guid: c832f590cde49aa42971516e03175fc6, type: 2}
 --- !u!1 &8820181923618433337
 GameObject:
   m_ObjectHideFlags: 0

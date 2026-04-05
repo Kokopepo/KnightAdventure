@@ -15,7 +15,13 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float movingSpeed = 5f;
     [SerializeField] private int maxHealth = 10;
+    [Space(20)] //абзац
     [SerializeField] private float damageRecoveryTime = 0.5f;
+    [Header("Dash Settings")] //можно заголовок
+    [SerializeField] private int dashSpeed = 4;
+    [SerializeField] private float dashTime = 0.2f;
+    [SerializeField] private TrailRenderer trailRenderer;
+    [SerializeField] private float dashCooldownTime = 0.2f;
 
     private Vector2 inputVector;
     private Rigidbody2D _rb;
@@ -27,6 +33,8 @@ public class Player : MonoBehaviour
 
     private bool _canTakeDamage;
     private bool _isAlive;
+    private float _initialMovingSpeed;
+    private bool _isDashing;
 
 
     private void Awake()
@@ -34,6 +42,7 @@ public class Player : MonoBehaviour
         Instance = this;
         _rb = GetComponent<Rigidbody2D>();
         _knockBack = GetComponent<KnockBack>();
+        _initialMovingSpeed = movingSpeed;
     }
 
     private void Start()
@@ -41,7 +50,8 @@ public class Player : MonoBehaviour
         _currentHealth = maxHealth;
         _canTakeDamage = true;
         _isAlive = true;
-        GameInput.Instance.OnPlayerAttack += Player_OnPlayerAttack;
+        GameInput.Instance.OnPlayerAttack += GameInput_OnPlayerAttack;
+        GameInput.Instance.OnPlayerDash += GameInput_OnPlayerDash;
     }
 
     private void Update()
@@ -125,13 +135,39 @@ public class Player : MonoBehaviour
         }
     }
     
-    private void Player_OnPlayerAttack(object sender, System.EventArgs e)
+    private void GameInput_OnPlayerAttack(object sender, System.EventArgs e)
     {
         ActiveWeapon.Instance.GetActiveWeapon().Attack();
     }
 
+    private void GameInput_OnPlayerDash(object sender, System.EventArgs e)
+    {
+        Dash();
+    }
+
+    private void Dash()
+    {
+        if (!_isDashing)
+        StartCoroutine(DashRoutine());
+    }
+
+    private IEnumerator DashRoutine()
+    {
+        _isDashing = true;
+        movingSpeed *= dashSpeed;
+        trailRenderer.emitting = true;
+
+        yield return new WaitForSeconds(dashTime); //непосредственно задержка
+        trailRenderer.emitting = false;
+
+        movingSpeed = _initialMovingSpeed; //возвращаем скорость
+
+        yield return new WaitForSeconds(dashCooldownTime); //кулдаун
+        _isDashing  = false;
+    }
+
     private void OnDestroy()
     {
-        GameInput.Instance.OnPlayerAttack -= Player_OnPlayerAttack;
+        GameInput.Instance.OnPlayerAttack -= GameInput_OnPlayerAttack;
     }
 }

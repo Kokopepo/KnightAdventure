@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8588584952400572259}
   - component: {fileID: 6109169500704276932}
   - component: {fileID: 8909436018361509434}
-  - component: {fileID: -483739992065924215}
   m_Layer: 0
   m_Name: BaseDeathVFX
   m_TagString: Untagged
@@ -44,7 +43,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 0.1
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 2
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -665,7 +664,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 0
+    type: 10
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -4889,15 +4888,3 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &-483739992065924215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7748022158153995547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71e540c4814789d4ba43c92f3c5d64a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
